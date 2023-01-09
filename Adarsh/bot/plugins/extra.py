@@ -1,16 +1,17 @@
 from Adarsh.bot import StreamBot
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram import filters
+from utils_bot import *
+from pyrogram.types import Message, filters
+db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
 import time
 import shutil, psutil
-from utils_bot import *
 from Adarsh import StartTime
 
 
-START_TEXT = """ Your Telegram DC Is : `{}`  """
+START_TEXT = """ Your Database Is : `{}`  """
 
 
-@StreamBot.on_message(filters.regex("maintainers😎"))
+@StreamBot.on_message(filters.regex("maintainers"))
 async def maintainers(b,m):
     try:
        await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
@@ -30,7 +31,7 @@ async def maintainers(b,m):
                     disable_web_page_preview=True)
             
          
-@StreamBot.on_message(filters.regex("follow❤️"))
+@StreamBot.on_message(filters.regex("follow"))
 async def follow_user(b,m):
     try:
        await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
@@ -50,16 +51,11 @@ async def follow_user(b,m):
                     disable_web_page_preview=True)
         
 
-@StreamBot.on_message(filters.regex("DC"))
-async def start(bot, update):
-    text = START_TEXT.format(update.from_user.dc_id)
-    await update.reply_text(
-        text=text,
-        disable_web_page_preview=True,
-        quote=True
-    )
+@StreamBot.on_message(filters.command("DC") & filters.private & filters.user(Var.OWNER_ID) & ~filters.edited)
+async def sts(c: Client, m: Message):
+    total_users = await db.total_users_count()
+    await m.reply_text(text=f"**Total Users in DB:** `{total_users}`", parse_mode="Markdown", quote=True)
 
-    
     
 @StreamBot.on_message(filters.command("list"))
 async def list(l, m):
