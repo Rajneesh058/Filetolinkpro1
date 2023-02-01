@@ -1,12 +1,10 @@
 from Adarsh.bot import StreamBot
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from utils_bot import *
-from pyrogram.types import Message, filters
-db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
+from pyrogram import filters
 import time
 import shutil, psutil
+from utils_bot import *
 from Adarsh import StartTime
-
 
 START_TEXT = """ Your Database Is : `{}`  """
 
