@@ -77,7 +77,7 @@ async def start(b, m):
     await StreamBot.send_photo(
         chat_id=m.chat.id,
         photo ="https://graph.org/file/19ad6ad1d04e540328efd.jpg",
-        caption =f'👋 Hᴇʏ {m.from_user.mention(style="md")}!,\nI ᴀᴍ Tᴇʟᴇɢʀᴀᴍ Fɪʟᴇs Sᴛʀᴇᴀᴍɪɴɢ Bᴏᴛ ᴀs ᴡᴇʟʟ Dɪʀᴇᴄᴛ Lɪɴᴋs Gᴇɴᴇʀᴀᴛᴇ.\n\nCʟɪᴄᴋ ᴏɴ Hᴇʟᴘ ᴛᴏ ɢᴇᴛ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ.\n\n𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸\n\n🔞 Pʀᴏɴ ᴄᴏɴᴛᴇɴᴛꜱ ʟᴇᴀᴅꜱ ᴛᴏ ᴘᴇʀᴍᴀɴᴇɴᴛ ʙᴀɴ ʏᴏᴜ.\n\n🍃 Bᴏᴛ Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ - @Epic_creation_bots',
+        caption =f'👋 Hᴇʏ {m.from_user.mention(style="md")},\n\nI ᴀᴍ Tᴇʟᴇɢʀᴀᴍ Fɪʟᴇs Sᴛʀᴇᴀᴍɪɴɢ Bᴏᴛ ᴀs ᴡᴇʟʟ Dɪʀᴇᴄᴛ Lɪɴᴋs Gᴇɴᴇʀᴀᴛᴇ.\n\nCʟɪᴄᴋ ᴏɴ Hᴇʟᴘ ᴛᴏ ɢᴇᴛ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ.\n\n𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸\n\n🔞 Pʀᴏɴ ᴄᴏɴᴛᴇɴᴛꜱ ʟᴇᴀᴅꜱ ᴛᴏ ᴘᴇʀᴍᴀɴᴇɴᴛ ʙᴀɴ ʏᴏᴜ.\n\n🍃 Bᴏᴛ Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ - @Epic_creation_bots',
         reply_markup=buttonz)
 
 @StreamBot.on_message((filters.command("help") | filters.regex('help📚')) & filters.private )
