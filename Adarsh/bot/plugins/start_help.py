@@ -77,8 +77,13 @@ async def start(b, m):
     await StreamBot.send_photo(
         chat_id=m.chat.id,
         photo ="https://graph.org/file/19ad6ad1d04e540328efd.jpg",
-        caption =f'👋 Hᴇʏ {m.from_user.mention(style="md")},\nI ᴀᴍ Tᴇʟᴇɢʀᴀᴍ Fɪʟᴇs Sᴛʀᴇᴀᴍɪɴɢ Bᴏᴛ ᴀs ᴡᴇʟʟ Dɪʀᴇᴄᴛ Lɪɴᴋs Gᴇɴᴇʀᴀᴛᴇ\nCʟɪᴄᴋ ᴏɴ Hᴇʟᴘ ᴛᴏ ɢᴇᴛ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ\n𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸\n🔞 Pʀᴏɴ ᴄᴏɴᴛᴇɴᴛꜱ ʟᴇᴀᴅꜱ ᴛᴏ ᴘᴇʀᴍᴀɴᴇɴᴛ ʙᴀɴ ʏᴏᴜ. \n Bᴏᴛ Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ : @Epic_creation_bots,
-                    reply_markup=buttonz)
+        caption ="""<i>👋 Hᴇʏ,</i>{username}\n
+<i>I'ᴍ Tᴇʟᴇɢʀᴀᴍ Fɪʟᴇs Sᴛʀᴇᴀᴍɪɴɢ Bᴏᴛ ᴀs ᴡᴇʟʟ Dɪʀᴇᴄᴛ Lɪɴᴋs Gᴇɴᴇʀᴀᴛᴇ</i>\n
+<i>Cʟɪᴄᴋ ᴏɴ Hᴇʟᴘ ᴛᴏ ɢᴇᴛ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</i>\n
+<i><u>𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸</u></i>
+<b>🔞 Pʀᴏɴ ᴄᴏɴᴛᴇɴᴛꜱ ʟᴇᴀᴅꜱ ᴛᴏ ᴘᴇʀᴍᴀɴᴇɴᴛ ʙᴀɴ ʏᴏᴜ.</b>\n\n
+<i><b>🍃 Bᴏᴛ Mᴀɪɴᴛᴀɪɴᴇᴅ Bʏ :</b>@Epic_creation_bots</i>""",
+reply_markup=buttonz)
 
 
 @StreamBot.on_message((filters.command("help") | filters.regex('help📚')) & filters.private )
