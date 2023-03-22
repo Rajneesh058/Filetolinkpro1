@@ -1,3 +1,4 @@
+# (c)  @AvishkarPatil
 
 import os
 import time
@@ -6,42 +7,39 @@ import random
 import asyncio
 import aiofiles
 import datetime
-from Adarsh.utils.broadcast_helper import send_msg
-from Adarsh.utils.database import Database
-from Adarsh.bot import StreamBot
-from Adarsh.vars import Var
+from WebStreamer.utils.broadcast_helper import send_msg
+from WebStreamer.utils.database import Database
+from WebStreamer.bot import StreamBot
+from WebStreamer.vars import Var
 from pyrogram import filters, Client
 from pyrogram.types import Message
-db = Database(Var.DATABASE_URL, Var.name)
-Broadcast_IDs = {}
+db = Database(Var.DATABASE_URL, Var.SESSION_NAME)
+broadcast_ids = {}
 
 
-@StreamBot.on_message(filters.command("status") & filters.private )
+@StreamBot.on_message(filters.command("status") & filters.private & filters.user(Var.OWNER_ID) & ~filters.edited)
 async def sts(c: Client, m: Message):
-    user_id=m.from_user.id
-    if user_id in Var.OWNER_ID:
-        total_users = await db.total_users_count()
-        await m.reply_text(text=f"Total Users in DB: {total_users}", quote=True)
-        
-        
-@StreamBot.on_message(filters.command("broadcast") & filters.private  & filters.user(list(Var.OWNER_ID)))
+    total_users = await db.total_users_count()
+    await m.reply_text(text=f"**Total Users in DB:** `{total_users}`", parse_mode="Markdown", quote=True)
+
+
+@StreamBot.on_message(filters.command("broadcast") & filters.private & filters.user(Var.OWNER_ID) & filters.reply & ~filters.edited)
 async def broadcast_(c, m):
-    user_id=m.from_user.id
-    out = await m.reply_text(
-            text=f"Broadcast initiated! You will be notified with log file when all the users are notified."
-    )
     all_users = await db.get_all_users()
     broadcast_msg = m.reply_to_message
     while True:
         broadcast_id = ''.join([random.choice(string.ascii_letters) for i in range(3)])
-        if not Broadcast_IDs.get(broadcast_id):
+        if not broadcast_ids.get(broadcast_id):
             break
+    out = await m.reply_text(
+        text=f"Broadcast initiated! You will be notified with log file when all the users are notified."
+    )
     start_time = time.time()
     total_users = await db.total_users_count()
     done = 0
     failed = 0
     success = 0
-    Broadcast_IDs[broadcast_id] = dict(
+    broadcast_ids[broadcast_id] = dict(
         total=total_users,
         current=done,
         failed=failed,
@@ -62,18 +60,18 @@ async def broadcast_(c, m):
             if sts == 400:
                 await db.delete_user(user['id'])
             done += 1
-            if Broadcast_IDs.get(broadcast_id) is None:
+            if broadcast_ids.get(broadcast_id) is None:
                 break
             else:
-                Broadcast_IDs[broadcast_id].update(
+                broadcast_ids[broadcast_id].update(
                     dict(
                         current=done,
                         failed=failed,
                         success=success
                     )
                 )
-    if Broadcast_IDs.get(broadcast_id):
-        Broadcast_IDs.pop(broadcast_id)
+    if broadcast_ids.get(broadcast_id):
+        broadcast_ids.pop(broadcast_id)
     completed_in = datetime.timedelta(seconds=int(time.time() - start_time))
     await asyncio.sleep(3)
     await out.delete()
