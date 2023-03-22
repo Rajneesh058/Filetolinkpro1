@@ -2,13 +2,13 @@ from Adarsh.bot import StreamBot
 from Adarsh.vars import Var
 import logging
 logger = logging.getLogger(__name__)
-from Adarsh.bot.plugins.stream import MY_PASS
 from Adarsh.utils.human_readable import humanbytes
 from Adarsh.utils.database import Database
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant
 from Adarsh.utils.file_properties import get_name, get_hash, get_media_file_size
+
 db = Database(Var.DATABASE_URL, Var.name)
 from pyrogram.types import ReplyKeyboardMarkup
 
@@ -44,14 +44,14 @@ ABOUT_TEXT = """
         InlineKeyboardButton('Aʙᴏᴜᴛ', callback_data='about'),
         InlineKeyboardButton('Cʟᴏsᴇ', callback_data='close')
         ]]
-    )
+    ),
 HELP_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('Hᴏᴍᴇ', callback_data='home'),
         InlineKeyboardButton('Aʙᴏᴜᴛ', callback_data='about'),
         InlineKeyboardButton('Cʟᴏsᴇ', callback_data='close')
         ]]
-    )
+    ),
 ABOUT_BUTTONS = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton('Hᴏᴍᴇ', callback_data='home'),
