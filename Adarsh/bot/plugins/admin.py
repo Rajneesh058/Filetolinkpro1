@@ -1,4 +1,4 @@
-# (c) @adarsh-goel
+
 import os
 import time
 import string
@@ -15,7 +15,8 @@ from pyrogram.types import Message
 db = Database(Var.DATABASE_URL, Var.name)
 Broadcast_IDs = {}
 
-@StreamBot.on_message(filters.command("users") & filters.private )
+
+@StreamBot.on_message(filters.command("status") & filters.private )
 async def sts(c: Client, m: Message):
     user_id=m.from_user.id
     if user_id in Var.OWNER_ID:
